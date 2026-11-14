@@ -11,12 +11,14 @@ export const ThemeProvider = ({ children }) => {
   const theme = {
     dark: isDarkMode,
     colors: {
-      background: isDarkMode ? '#121212' : '#f5f7fa',
-      card: isDarkMode ? '#1e1e1e' : '#ffffff',
-      text: isDarkMode ? '#ffffff' : '#1e3d59',
-      subText: isDarkMode ? '#b0bec5' : '#576574',
-      border: isDarkMode ? '#2c2c2c' : '#dcdde1',
-      primary: '#17b978',
+      background: isDarkMode ? '#0d1117' : '#f8fafc',
+      card: isDarkMode ? '#161b22' : '#ffffff',
+      text: isDarkMode ? '#f0f6fc' : '#0f172a',
+      subText: isDarkMode ? '#8b949e' : '#64748b',
+      border: isDarkMode ? '#30363d' : '#e2e8f0',
+      primary: '#10b981', // Modern Emerald Green
+      primaryLight: isDarkMode ? 'rgba(16, 185, 129, 0.15)' : '#ecfdf5',
+      accent: '#3b82f6',
     },
   };
 
