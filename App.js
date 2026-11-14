@@ -1,10 +1,11 @@
-// App.js
+// App.js 
 import React from 'react';
 import { Switch, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { ThemeProvider, useTheme } from './ThemeContext';
+import LoginScreen from './screens/LoginScreen'; // 1. අලුත් Login Screen එක import කිරීම
 import HomeScreen from './screens/HomeScreen';
 import CatalogScreen from './screens/CatalogScreen';
 import DetailScreen from './screens/DetailScreen';
@@ -19,9 +20,10 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="Login" // 2. ඇප් එක පටන් ගන්නා තිරය ලෙස Login සැකසීම
         screenOptions={{
           headerStyle: {
-            backgroundColor: isDarkMode ? '#1e1e1e' : '#1e3d59',
+            backgroundColor: isDarkMode ? '#161b22' : '#1e3d59',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -35,14 +37,15 @@ function AppNavigator() {
               <Switch
                 value={isDarkMode}
                 onValueChange={toggleTheme}
-                trackColor={{ false: '#767577', true: '#17b978' }}
+                trackColor={{ false: '#767577', true: '#10b981' }}
                 thumbColor="#f4f3f4"
               />
             </View>
           ),
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'UniLib Dashboard' }} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ title: 'UniLib Portal' }} />
+        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'UniLib Dashboard', headerLeft: null }} />
         <Stack.Screen name="Catalog" component={CatalogScreen} options={{ title: 'Book Catalog' }} />
         <Stack.Screen name="Details" component={DetailScreen} options={{ title: 'Book Details' }} />
         <Stack.Screen name="Borrowed" component={BorrowedScreen} options={{ title: 'My Borrowed Books' }} />
