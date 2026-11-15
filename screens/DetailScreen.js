@@ -460,6 +460,57 @@ export default function DetailScreen({ route, navigation }) {
               </Text>
             </TouchableOpacity>
 
+            {/* Recent Student Ratings & Reviews Horizontal ScrollView */}
+            <View style={styles.recentReviewsSection}>
+              <View style={styles.recentReviewsHeaderRow}>
+                <Text style={[styles.sectionHeading, { color: theme.colors.text, marginBottom: 0 }]}>
+                  Recent Student Feedback
+                </Text>
+                <TouchableOpacity onPress={() => setActiveTab('reviews')} activeOpacity={0.7}>
+                  <Text style={[styles.viewAllReviewsLink, { color: theme.colors.primary }]}>
+                    All ({totalReviews}) →
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.horizontalScrollContent}
+              >
+                {reviews.map((rev) => (
+                  <View
+                    key={`mini-${rev.id}`}
+                    style={[
+                      styles.miniReviewCard,
+                      {
+                        backgroundColor: isDarkMode ? '#0d1117' : '#f8fafc',
+                        borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : theme.colors.border,
+                      },
+                    ]}
+                  >
+                    <View style={styles.miniCardHeader}>
+                      <Text style={[styles.miniStudentId, { color: theme.colors.text }]}>
+                        {rev.studentId}
+                      </Text>
+                      <Text style={styles.miniRatingStars}>
+                        {'★'.repeat(rev.rating)}
+                      </Text>
+                    </View>
+                    <Text
+                      style={[styles.miniComment, { color: theme.colors.subText }]}
+                      numberOfLines={2}
+                    >
+                      "{rev.comment}"
+                    </Text>
+                    <Text style={[styles.miniDate, { color: theme.colors.subText }]}>
+                      {rev.date}
+                    </Text>
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
+
             {/* Switch to Reviews Shortcut Button */}
             <TouchableOpacity
               style={[
@@ -474,6 +525,24 @@ export default function DetailScreen({ route, navigation }) {
             >
               <Text style={[styles.secondaryBtnText, { color: theme.colors.text }]}>
                 ⭐ View Student Reviews & Feedback ({totalReviews})
+              </Text>
+            </TouchableOpacity>
+
+            {/* Open Full Dedicated Rating Screen */}
+            <TouchableOpacity
+              style={[
+                styles.secondaryBtn,
+                {
+                  backgroundColor: isDarkMode ? 'rgba(16, 185, 129, 0.08)' : '#ecfdf5',
+                  borderColor: isDarkMode ? 'rgba(16, 185, 129, 0.25)' : '#a7f3d0',
+                  marginTop: 10,
+                },
+              ]}
+              onPress={() => navigation.navigate('Review', { book })}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.secondaryBtnText, { color: theme.colors.primary }]}>
+                ✍️ Open Full Rating Page
               </Text>
             </TouchableOpacity>
           </View>
@@ -784,6 +853,17 @@ const styles = StyleSheet.create({
   screenWrapper: {
     flex: 1,
     width: '100%',
+    ...Platform.select({
+      web: {
+        height: '100vh',
+        maxHeight: '100vh',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch',
+      },
+      default: {
+        flex: 1,
+      },
+    }),
   },
   scrollContent: {
     paddingHorizontal: 16,
@@ -1257,5 +1337,57 @@ const styles = StyleSheet.create({
     color: '#10b981',
     fontSize: 11,
     fontWeight: '600',
+  },
+  // Recent Reviews Preview ScrollView in Overview
+  recentReviewsSection: {
+    marginTop: 18,
+    marginBottom: 16,
+  },
+  recentReviewsHeaderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  viewAllReviewsLink: {
+    fontSize: 12.5,
+    fontWeight: '700',
+  },
+  horizontalScrollContent: {
+    paddingVertical: 4,
+  },
+  miniReviewCard: {
+    width: 220,
+    borderRadius: 14,
+    padding: 12,
+    borderWidth: 1,
+    marginRight: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  miniCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  miniStudentId: {
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  miniRatingStars: {
+    fontSize: 11,
+    color: '#f59e0b',
+  },
+  miniComment: {
+    fontSize: 12,
+    lineHeight: 16,
+    marginBottom: 6,
+  },
+  miniDate: {
+    fontSize: 10.5,
   },
 });
