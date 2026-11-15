@@ -99,10 +99,20 @@ In higher education institutions, students and researchers need swift, frictionl
 
 ### 💻 Web & Desktop Experience (React Native Web)
 
-| Desktop Catalog & Filtering Interface | Desktop Book Details & Ratings Hub |
+| 1. Student Authentication Portal | 2. Smart Campus Dashboard |
 | :---: | :---: |
-| ![Web Catalog Placeholder](https://placehold.co/700x420/161b22/10b981?text=UniLib+Web+Catalog+Interface) | ![Web Details Placeholder](https://placehold.co/700x420/161b22/10b981?text=UniLib+Web+Book+Details+%26+Reviews) |
-| *Max-width centered container with anti-gravity emerald cards* | *Split scorecard breakdown, review form & smooth browser scrolling* |
+| <img src="assets/screenshots/01-login-portal-web.png" width="100%" alt="UniLib Web Portal Login Screen" /> | <img src="assets/screenshots/02-dashboard-web.png" width="100%" alt="UniLib Web Campus Dashboard" /> |
+| *Secure student login with dual-tab authentication & dark mode* | *Central hub with shortcuts to Catalog, Loans, and Library Profile* |
+
+| 3. Real-Time Book Catalog & Search | 4. Interactive Book Details & Overview |
+| :---: | :---: |
+| <img src="assets/screenshots/03-catalog-search-web.png" width="100%" alt="UniLib Web Catalog Screen with Search and Category Pills" /> | <img src="assets/screenshots/04-book-details-web.png" width="100%" alt="UniLib Web Book Details and Overview Tab" /> |
+| *Real-time category pills (CS, SE, Self-Improvement) and instant search* | *Academic specifications table, shelf locations & instant reservation* |
+
+| 5. Active Borrowed Records | 6. Library Hours & Student Profile |
+| :---: | :---: |
+| <img src="assets/screenshots/05-borrowed-records-web.png" width="100%" alt="UniLib Web Active Borrowed Records" /> | <img src="assets/screenshots/06-profile-hours-web.png" width="100%" alt="UniLib Web Library Hours and Student Profile" /> |
+| *Track active loans, due dates, and reserved book statuses* | *Verified student profile, weekly library schedule & circulation rules* |
 
 ---
 
