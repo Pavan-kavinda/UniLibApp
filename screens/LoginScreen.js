@@ -25,7 +25,7 @@ export default function LoginScreen({ navigation }) {
     if (isSignIn) {
       navigation.replace('Home');
     } else {
-      Alert.alert("Success", "Account created successfully! Please sign in.", [
+      Alert.alert("Success", "Account created successfully! Please login.", [
         { text: "OK", onPress: () => setIsSignIn(true) }
       ]);
     }
@@ -39,14 +39,14 @@ export default function LoginScreen({ navigation }) {
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={[styles.card, { backgroundColor: theme.colors.card, borderColor: theme.colors.border }]}>
           
-          {/* Sign In & Sign Up Tabs */}
+          {/* Login & Sign Up Tabs */}
           <View style={[styles.tabContainer, { backgroundColor: theme.colors.background, borderColor: theme.colors.border }]}>
             <TouchableOpacity 
               style={[styles.tab, isSignIn && { backgroundColor: theme.colors.primary }]}
               onPress={() => setIsSignIn(true)}
               activeOpacity={0.8}
             >
-              <Text style={[styles.tabText, { color: isSignIn ? '#fff' : theme.colors.text }]}>Sign In</Text>
+              <Text style={[styles.tabText, { color: isSignIn ? '#fff' : theme.colors.text }]}>Login</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -112,7 +112,7 @@ export default function LoginScreen({ navigation }) {
             onPress={handleSubmit}
             activeOpacity={0.8}
           >
-            <Text style={styles.loginBtnText}>{isSignIn ? 'Sign In to UniLib' : 'Register Account'}</Text>
+            <Text style={styles.loginBtnText}>{isSignIn ? 'Login to UniLib' : 'Register Account'}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -141,10 +141,11 @@ const styles = StyleSheet.create({
     borderWidth: 1, 
     padding: 4, 
     marginBottom: 20,
-    overflow: 'hidden'
+    width: '100%'
   },
   tab: { 
-    flex: 1, 
+    flex: 1,
+    flexBasis: '50%', 
     paddingVertical: 12, 
     alignItems: 'center', 
     justifyContent: 'center',
