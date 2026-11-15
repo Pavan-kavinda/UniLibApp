@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useTheme } from '../ThemeContext';
 
-export default function DetailScreen({ route }) {
+export default function DetailScreen({ route, navigation }) {
   const { book } = route.params || { book: {} };
   const { theme } = useTheme();
   const [availableCopies, setAvailableCopies] = useState(book.availableCopies || 0);
@@ -21,8 +21,12 @@ export default function DetailScreen({ route }) {
     }
   };
 
-  return (
-    <ScrollView contentContainerStyle={[styles.container, { backgroundColor: theme.colors.background }]}>
+ return (
+    <ScrollView 
+      style={{ flex: 1, backgroundColor: theme.colors.background }}
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={true}
+    >
       <View style={[styles.imageCard, { backgroundColor: theme.colors.card, borderColor: theme.colors.border }]}>
         <Image source={{ uri: book.image }} style={styles.image} />
       </View>
@@ -57,6 +61,7 @@ export default function DetailScreen({ route }) {
           {book.description || 'Standard academic resource available for university students and researchers.'}
         </Text>
 
+        {/* Reserve Button */}
         <TouchableOpacity 
           style={[styles.reserveBtn, { backgroundColor: availableCopies > 0 && !isReserved ? theme.colors.primary : '#94a3b8' }]} 
           onPress={handleReserve}
@@ -66,13 +71,25 @@ export default function DetailScreen({ route }) {
             {isReserved ? 'Reserved Successfully ✅' : availableCopies > 0 ? 'Reserve This Book Now' : 'Out of Stock'}
           </Text>
         </TouchableOpacity>
+
+        {/* Rate & Review Button */}
+        <TouchableOpacity 
+          style={[styles.reviewBtn, { backgroundColor: theme.colors.background, borderColor: theme.colors.border }]}
+          onPress={() => navigation.navigate('Review', { book })}
+          activeOpacity={0.8}
+        >
+          <Text style={[styles.reviewBtnText, { color: theme.colors.text }]}>⭐ Rate & Review This Book</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flexGrow: 1, padding: 20 },
+  container: { 
+    padding: 20, 
+    paddingBottom: 40 // පහළින් ප්‍රමාණවත් ඉඩක් ලබා දීම සඳහා
+  },
   imageCard: { 
     alignItems: 'center', 
     justifyContent: 'center',
@@ -105,7 +122,9 @@ const styles = StyleSheet.create({
   label: { fontSize: 14 },
   value: { fontSize: 14, fontWeight: '600' },
   descriptionTitle: { fontSize: 17, fontWeight: '700', marginTop: 18, marginBottom: 6 },
-  description: { fontSize: 14, lineHeight: 22, marginBottom: 24 },
-  reserveBtn: { padding: 16, borderRadius: 14, alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
+  description: { fontSize: 14, lineHeight: 22, marginBottom: 16 },
+  reserveBtn: { padding: 16, borderRadius: 14, alignItems: 'center', marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 3 },
   reserveBtnText: { color: '#fff', fontSize: 16, fontWeight: '700' },
+  reviewBtn: { padding: 15, borderRadius: 14, alignItems: 'center', borderWidth: 1, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.02, shadowRadius: 3, elevation: 1 },
+  reviewBtnText: { fontSize: 15, fontWeight: '700' },
 });

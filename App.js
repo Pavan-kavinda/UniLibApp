@@ -5,12 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { ThemeProvider, useTheme } from './ThemeContext';
-import LoginScreen from './screens/LoginScreen'; // 1. අලුත් Login Screen එක import කිරීම
+import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import CatalogScreen from './screens/CatalogScreen';
 import DetailScreen from './screens/DetailScreen';
 import BorrowedScreen from './screens/BorrowedScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ReviewScreen from './screens/ReviewScreen'; // Review Screen එක ඉම්පෝර්ට් කිරීම
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login" // 2. ඇප් එක පටන් ගන්නා තිරය ලෙස Login සැකසීම
+        initialRouteName="Login" // මුල්ම තිරය ලෙස Login සැකසීම
         screenOptions={{
           headerStyle: {
             backgroundColor: isDarkMode ? '#161b22' : '#1e3d59',
@@ -50,6 +51,7 @@ function AppNavigator() {
         <Stack.Screen name="Details" component={DetailScreen} options={{ title: 'Book Details' }} />
         <Stack.Screen name="Borrowed" component={BorrowedScreen} options={{ title: 'My Borrowed Books' }} />
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Library Profile & Hours' }} />
+        <Stack.Screen name="Review" component={ReviewScreen} options={{ title: 'Write a Review' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
