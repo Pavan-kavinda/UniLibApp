@@ -10,7 +10,10 @@ import {
   Image,
   Platform,
   ScrollView,
+  Modal,
+  Alert,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { LIBRARY_BOOKS } from '../data/books';
 import { useTheme } from '../ThemeContext';
 
@@ -25,6 +28,39 @@ export default function CatalogScreen({ navigation }) {
   const { theme, isDarkMode } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  // Safely reset navigation back to LoginScreen
+  const performLogout = useCallback(() => {
+    setShowLogoutModal(false);
+    if (navigation) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    }
+  }, [navigation]);
+
+  // Handle Logout button click with confirmation
+  const handleLogoutPress = useCallback(() => {
+    if (Platform.OS === 'web') {
+      setShowLogoutModal(true);
+    } else {
+      Alert.alert(
+        'Log Out',
+        'Are you sure you want to log out of UniLib?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Log Out',
+            style: 'destructive',
+            onPress: performLogout,
+          },
+        ],
+        { cancelable: true }
+      );
+    }
+  }, [performLogout]);
 
   // Real-time filtering by title, author, or category
   const filteredBooks = useMemo(() => {
@@ -225,8 +261,26 @@ export default function CatalogScreen({ navigation }) {
             }),
           ]}
         >
-          <View style={styles.bannerBadge}>
-            <Text style={styles.bannerBadgeText}>✨ UniLib Discovery</Text>
+          <View style={styles.bannerTopRow}>
+            <View style={styles.bannerBadge}>
+              <Text style={styles.bannerBadgeText}>✨ UniLib Discovery</Text>
+            </View>
+            <TouchableOpacity
+              style={[
+                styles.headerLogoutBtn,
+                {
+                  backgroundColor: isDarkMode ? 'rgba(239, 68, 68, 0.12)' : '#fef2f2',
+                  borderColor: isDarkMode ? 'rgba(239, 68, 68, 0.3)' : '#fecaca',
+                },
+              ]}
+              onPress={handleLogoutPress}
+              activeOpacity={0.8}
+              accessibilityRole="button"
+              accessibilityLabel="Log out of UniLib"
+            >
+              <Ionicons name="log-out-outline" size={14} color="#ef4444" style={{ marginRight: 4 }} />
+              <Text style={styles.headerLogoutBtnText}>Log Out</Text>
+            </TouchableOpacity>
           </View>
           <Text style={[styles.bannerTitle, { color: theme.colors.text }]}>
             University Book Catalog
@@ -441,6 +495,70 @@ export default function CatalogScreen({ navigation }) {
           showsVerticalScrollIndicator={true}
         />
       </View>
+
+      {/* Confirmation Modal (Web & Cross-Platform) */}
+      <Modal
+        visible={showLogoutModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowLogoutModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View
+            style={[
+              styles.modalCard,
+              {
+                backgroundColor: theme.colors.card,
+                borderColor: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : theme.colors.border,
+              },
+              Platform.select({
+                web: {
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+                },
+              }),
+            ]}
+          >
+            <View style={styles.modalIconBox}>
+              <Ionicons name="alert-circle-outline" size={36} color="#ef4444" />
+            </View>
+
+            <Text style={[styles.modalTitle, { color: theme.colors.text }]}>
+              Confirm Log Out
+            </Text>
+
+            <Text style={[styles.modalMessage, { color: theme.colors.subText }]}>
+              Are you sure you want to log out of UniLib? You will need to enter your Student ID and password to access the library again.
+            </Text>
+
+            <View style={styles.modalActionsRow}>
+              <TouchableOpacity
+                style={[
+                  styles.modalCancelBtn,
+                  {
+                    backgroundColor: isDarkMode ? '#0d1117' : '#f8fafc',
+                    borderColor: theme.colors.border,
+                  },
+                ]}
+                onPress={() => setShowLogoutModal(false)}
+                activeOpacity={0.8}
+              >
+                <Text style={[styles.modalCancelText, { color: theme.colors.text }]}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.modalConfirmBtn}
+                onPress={performLogout}
+                activeOpacity={0.85}
+              >
+                <Ionicons name="log-out-outline" size={18} color="#ffffff" style={{ marginRight: 6 }} />
+                <Text style={styles.modalConfirmText}>Log Out</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -819,5 +937,93 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
     letterSpacing: 0.5,
+  },
+  // Banner Top Row & Header Logout Button
+  bannerTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  headerLogoutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 9,
+    paddingVertical: 4.5,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  headerLogoutBtnText: {
+    color: '#ef4444',
+    fontSize: 12,
+    fontWeight: '700',
+  },
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.65)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  modalCard: {
+    width: '100%',
+    maxWidth: 420,
+    borderRadius: 24,
+    padding: 24,
+    borderWidth: 1,
+    alignItems: 'center',
+  },
+  modalIconBox: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: 'rgba(239, 68, 68, 0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 14,
+  },
+  modalTitle: {
+    fontSize: 19,
+    fontWeight: '800',
+    letterSpacing: -0.3,
+    marginBottom: 8,
+  },
+  modalMessage: {
+    fontSize: 13.5,
+    lineHeight: 20,
+    textAlign: 'center',
+    marginBottom: 22,
+  },
+  modalActionsRow: {
+    flexDirection: 'row',
+    width: '100%',
+    gap: 12,
+  },
+  modalCancelBtn: {
+    flex: 1,
+    paddingVertical: 13,
+    borderRadius: 14,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalCancelText: {
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  modalConfirmBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#ef4444',
+    paddingVertical: 13,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalConfirmText: {
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '700',
   },
 });
