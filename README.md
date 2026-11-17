@@ -83,19 +83,34 @@ In higher education institutions, students and researchers need swift, frictionl
 
 > *Note: Replace the placeholders below with actual screenshots of your UniLib app in action.*
 
+
 ### 📱 Mobile Experience (iOS & Android)
 
-| 1. Smart Hub Dashboard | 2. Real-Time Catalog | 3. Book Overview Tab |
-| :---: | :---: | :---: |
-| ![Mobile Dashboard Placeholder](https://placehold.co/300x600/161b22/10b981?text=UniLib+Dashboard) | ![Mobile Catalog Placeholder](https://placehold.co/300x600/161b22/10b981?text=Catalog+Screen) | ![Mobile Details Placeholder](https://placehold.co/300x600/161b22/10b981?text=Book+Details+Tab) |
-| *Personalized student dashboard* | *Instant category pills & search* | *Specs, shelf & reservation* |
+Explore the UniLib mobile application through its intuitive and responsive user interface.
 
-| 4. Ratings & Reviews Tab | 5. Write Review Screen | 6. Light / Dark Switch |
+#### 🔐 Authentication & Dashboard
+
+| 1. Login Screen | 2. Smart Hub Dashboard | 3. Book Catalog |
 | :---: | :---: | :---: |
-| ![Mobile Reviews Placeholder](https://placehold.co/300x600/161b22/10b981?text=Ratings+%26+Reviews) | ![Mobile Write Review Placeholder](https://placehold.co/300x600/161b22/10b981?text=Submit+Review+Form) | ![Mobile Theme Placeholder](https://placehold.co/300x600/f8fafc/10b981?text=Light+Mode+Theme) |
-| *Analytics & star distribution* | *Interactive 1-5 star picker* | *Dynamic ThemeContext toggle* |
+| <img src="screenshots/01-login.png" width="250" alt="UniLib Login Screen"/> | <img src="screenshots/02-dashboard.png" width="250" alt="UniLib Dashboard"/> | <img src="screenshots/03-catalog.png" width="250" alt="UniLib Book Catalog"/> |
+| *Secure student authentication* | *Personalized student dashboard* | *Real-time book search and filters* |
+
+#### 📚 Book Details & Reviews
+
+| 4. Book Details | 5. Reviews & Ratings | 6. Borrowed Books |
+| :---: | :---: | :---: |
+| <img src="screenshots/04-book-details.png" width="250" alt="Book Details"/> | <img src="screenshots/05-reviews.png" width="250" alt="Reviews and Ratings"/> | <img src="screenshots/06-borrowed.png" width="250" alt="Borrowed Books"/> |
+| *Book specifications and reservations* | *Interactive student reviews and ratings* | *Track active loans and due dates* |
+
+#### 👤 Student Profile & Dark Mode
+
+| 7. Library Profile & Hours | 8. Dark Mode |
+| :---: | :---: |
+| <img src="screenshots/07-profile.png" width="250" alt="Library Profile"/> | <img src="screenshots/08-dark-mode.png" width="250" alt="UniLib Dark Mode"/> |
+| *Student profile and library hours* | *Seamless dark theme experience* |
 
 ---
+
 
 ### 💻 Web & Desktop Experience (React Native Web)
 
