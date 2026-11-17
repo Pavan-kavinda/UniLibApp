@@ -92,7 +92,7 @@ Explore the UniLib mobile application through its intuitive and responsive user 
 
 | 1. Login Screen | 2. Smart Hub Dashboard | 3. Book Catalog |
 | :---: | :---: | :---: |
-| <img src="screenshots/01-login.png" width="250" alt="UniLib Login Screen"/> | <img src="screenshots/02-dashboard.png" width="250" alt="UniLib Dashboard"/> | <img src="screenshots/03-catalog.png" width="250" alt="UniLib Book Catalog"/> |
+| <img src="screenshots/login.png" width="250" alt="UniLib Login Screen"/> | <img src="screenshots/dashboard.png" width="250" alt="UniLib Dashboard"/> | <img src="screenshots/book-catalog.png" width="250" alt="UniLib Book Catalog"/> |
 | *Secure student authentication* | *Personalized student dashboard* | *Real-time book search and filters* |
 
 #### 📚 Book Details & Reviews
