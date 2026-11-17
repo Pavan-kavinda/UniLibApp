@@ -99,14 +99,14 @@ Explore the UniLib mobile application through its intuitive and responsive user 
 
 | 4. Book Details | 5. Reviews & Ratings | 6. Borrowed Books |
 | :---: | :---: | :---: |
-| <img src="screenshots/04-book-details.png" width="250" alt="Book Details"/> | <img src="screenshots/05-reviews.png" width="250" alt="Reviews and Ratings"/> | <img src="screenshots/06-borrowed.png" width="250" alt="Borrowed Books"/> |
+| <img src="screenshots/book-details.png" width="250" alt="Book Details"/> | <img src="screenshots/reviews-ratings.png" width="250" alt="Reviews and Ratings"/> | <img src="screenshots/borrowed-books.png" width="250" alt="Borrowed Books"/> |
 | *Book specifications and reservations* | *Interactive student reviews and ratings* | *Track active loans and due dates* |
 
 #### 👤 Student Profile & Dark Mode
 
 | 7. Library Profile & Hours | 8. Dark Mode |
 | :---: | :---: |
-| <img src="screenshots/07-profile.png" width="250" alt="Library Profile"/> | <img src="screenshots/08-dark-mode.png" width="250" alt="UniLib Dark Mode"/> |
+| <img src="screenshots/library-profile.png" width="250" alt="Library Profile"/> | <img src="screenshots/dark-mode.png" width="250" alt="UniLib Dark Mode"/> |
 | *Student profile and library hours* | *Seamless dark theme experience* |
 
 ---
